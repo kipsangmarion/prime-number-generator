@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\title{Eratosthenes Sieve Algorithm for Generating Prime Numbers}
+\author{Marion Kipsang}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+The Sieve of Eratosthenes is an ancient algorithm for finding all prime numbers up to a given limit. It efficiently identifies prime numbers by iteratively eliminating multiples of each prime found, leaving only the prime numbers at the end of the process.
+
+\section{Algorithm}
+
+The Eratosthenes Sieve algorithm can be outlined as follows:
+
+\begin{algorithm}
+\caption{Eratosthenes Sieve Algorithm}\label{eratosthenes-sieve}
+\begin{algorithmic}[1]
+\Procedure{SieveOfEratosthenes}{limit}
+    \State Let $\text{isPrime}[0, 1, 2, \ldots, \text{limit}]$ be a boolean array initialized to \textbf{true}.
+    \State $\text{isPrime}[0] \gets \text{isPrime}[1] \gets \textbf{false}$ \Comment{0 and 1 are not prime.}
+    
+    \For{$i \gets 2$ to $\sqrt{\text{limit}}$} \Comment{Loop through potential prime numbers.}
+        \If{$\text{isPrime}[i] = \textbf{true}$} \Comment{Found a prime number.}
+            \For{$j \gets i^2$ to $\text{limit}$ step $i$} \Comment{Mark multiples of $i$ as not prime.}
+                \State $\text{isPrime}[j] \gets \textbf{false}$
+            \EndFor
+        \EndIf
+    \EndFor
+    
+    \State \textbf{return} all indices $i$ where $\text{isPrime}[i] = \textbf{true}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\section{Explanation}
+
+\begin{itemize}
+\item The algorithm initializes a boolean array $\text{isPrime}$ with all elements set to \textbf{true}, representing that all numbers from $0$ to the \textit{limit} are initially considered prime candidates.
+\item We set $\text{isPrime}[0]$ and $\text{isPrime}[1]$ to \textbf{false}, as they are not prime numbers.
+\item Starting from $2$ (the first prime number), the algorithm loops through the array. If a number $i$ is found to be prime ($\text{isPrime}[i] = \textbf{true}$), all its multiples from $i^2$ up to the \textit{limit} are marked as not prime ($\text{isPrime}[j] = \textbf{false}$).
+\item After the loop completes, the array will contain \textbf{true} for prime numbers and \textbf{false} for non-prime numbers.
+\item The algorithm returns a list of all indices $i$ where $\text{isPrime}[i] = \textbf{true}$, which corresponds to the prime numbers up to the specified \textit{limit}.
+\end{itemize}
+
+\section{Example}
+
+Let's apply the Eratosthenes Sieve algorithm to find all prime numbers up to $20$.
+
+\begin{enumerate}
+\item Initialize the array: $\text{isPrime} = [\textbf{true}, \textbf{true}, \textbf{true}, \ldots, \textbf{true}]$.
+\item Set $\text{isPrime}[0] = \text{isPrime}[1] = \textbf{false}$.
+\item Start the loop with $i = 2$. Since $\text{isPrime}[2] = \textbf{true}$, mark all multiples of $2$ as not prime: $\text{isPrime}[4] = \text{isPrime}[6] = \text{isPrime}[8] = \textbf{false}$, and so on.
+\item Move to $i = 3$, which is also prime ($\text{isPrime}[3] = \textbf{true}$). Mark all multiples of $3$ as not prime: $\text{isPrime}[6] = \text{isPrime}[9] = \textbf{false}$.
+\item Continue this process until $i = \sqrt{20}$.
+\item At the end, the array $\text{isPrime}$ will be: $[\textbf{true}, \textbf{true}, \textbf{true}, \textbf{false}, \textbf{true}, \textbf{false}, \textbf{true}, \textbf{false}, \textbf{false}, \textbf{false}, \textbf{true}, \textbf{false}, \textbf{true}, \textbf{false}, \textbf{false}, \textbf{false}, \textbf{true}, \textbf{false}, \textbf{true}, \textbf{false}, \textbf{false}]$.
+\item The prime numbers up to $20$ are: $[2, 3, 5, 7, 11, 13, 17, 19]$.
+\end{enumerate}
+
+\section{Conclusion}
+
+The Sieve of Eratosthenes is a simple yet efficient algorithm for generating prime numbers up to a given limit. Its time complexity is $O(n \log(\log n))$, making it significantly faster than checking each number for primality individually.
+
+\end{document}
