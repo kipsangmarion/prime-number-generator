@@ -25,7 +25,7 @@ To run this program, you need a C compiler installed on your system. If you don'
 To compile the C program, use the following command in the terminal:
 
 ```bash
-gcc -o prime_generator prime_generator.c
+gcc -o prime_generator prime_generator.c -lm
 ```
 
 ### Running the Program
