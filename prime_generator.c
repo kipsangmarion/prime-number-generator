@@ -6,16 +6,15 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
+#include <string.h>
 
-int primeGen(int limit)
+void primeGen(int limit)
 {
 	bool isPrime[limit + 1];
 	int i, j;
 	
 	// initialize array elements to true
-	for (i=0; i <= sqrt(limit); i++){
-		isPrime[i] = true;
-	}
+	memset(isPrime, true, sizeof(isPrime));
 	
 	// set 0 and 1 to not be prime
 	isPrime[0] = isPrime[1] =false;
@@ -35,7 +34,7 @@ int primeGen(int limit)
 	printf("Prime numbers upto %d:\n", limit);
 	for (i=2; i <= limit; i++){
 		if (isPrime[i]){
-			printf("%d", i);
+			printf("%d ", i);
 		}
 	}
 	printf("\n");
