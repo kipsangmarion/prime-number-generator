@@ -19,7 +19,7 @@ void primeGen(int limit)
 	// set 0 and 1 to not be prime
 	isPrime[0] = isPrime[1] =false;
 	
-	// apply Erastosthenes sieve
+	// apply Eratosthenes sieve
 	// starting from 2 to square root of the limit
 	for (i=2; i <= sqrt(limit); i++){
 		if (isPrime[i]){
